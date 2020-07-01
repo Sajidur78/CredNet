@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1BCD92A-1005-4068-867C-050698258EB3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CredNet</RootNamespace>
+    <AssemblyName>CredNet</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CustomMarshalers" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0-preview.5.20278.1\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BiDictionary.cs" />
+    <Compile Include="Binder.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controls\Checkbox.cs" />
+    <Compile Include="Controls\ComboBox.cs" />
+    <Compile Include="Controls\CommandLink.cs" />
+    <Compile Include="Controls\FieldControl.cs" />
+    <Compile Include="Controls\SubmitButton.cs" />
+    <Compile Include="CredentialSerializer.cs" />
+    <Compile Include="DataBindingCollection.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Globals.cs" />
+    <Compile Include="Interface\IControl.cs" />
+    <Compile Include="Controls\Label.cs" />
+    <Compile Include="Controls\PasswordBox.cs" />
+    <Compile Include="Controls\TextBox.cs" />
+    <Compile Include="Controls\TileBitmap.cs" />
+    <Compile Include="CredentialProviderBase.cs" />
+    <Compile Include="CredentialProviderCredential.cs" />
+    <Compile Include="Interface\IReportResult.cs" />
+    <Compile Include="Interface\IValueConverter.cs" />
+    <Compile Include="Interop\AccountOptions.cs" />
+    <Compile Include="Interop\FieldDescriptor.cs" />
+    <Compile Include="Interop\FieldInteractiveState.cs" />
+    <Compile Include="Interop\FieldOptions.cs" />
+    <Compile Include="Interop\FieldState.cs" />
+    <Compile Include="Interop\FieldType.cs" />
+    <Compile Include="Interop\GenericCredentialProvider.cs" />
+    <Compile Include="Interop\GenericCredentialProviderClass.cs" />
+    <Compile Include="Interop\IConnectableCredentialProviderCredential.cs" />
+    <Compile Include="Interop\ICredentialProvider.cs" />
+    <Compile Include="Interop\ICredentialProviderCredential.cs" />
+    <Compile Include="Interop\ICredentialProviderCredential2.cs" />
+    <Compile Include="Interop\ICredentialProviderCredentialEvents.cs" />
+    <Compile Include="Interop\ICredentialProviderCredentialEvents2.cs" />
+    <Compile Include="Interop\ICredentialProviderCredentialWithFieldOptions.cs" />
+    <Compile Include="Interop\ICredentialProviderEvents.cs" />
+    <Compile Include="Interop\ICredentialProviderFilter.cs" />
+    <Compile Include="Interop\ICredentialProviderSetUserArray.cs" />
+    <Compile Include="Interop\ICredentialProviderUser.cs" />
+    <Compile Include="Interop\ICredentialProviderUserArray.cs" />
+    <Compile Include="Interop\IEnumSTATSTG.cs" />
+    <Compile Include="Interop\IQueryContinue.cs" />
+    <Compile Include="Interop\IQueryContinueWithStatus.cs" />
+    <Compile Include="Interop\IRecordInfo.cs" />
+    <Compile Include="Interop\ISequentialStream.cs" />
+    <Compile Include="Interop\IStorage.cs" />
+    <Compile Include="Interop\IStream.cs" />
+    <Compile Include="Interop\ITypeComp.cs" />
+    <Compile Include="Interop\ITypeInfo.cs" />
+    <Compile Include="Interop\ITypeLib.cs" />
+    <Compile Include="Interop\NPCredentialProvider.cs" />
+    <Compile Include="Interop\NPCredentialProviderClass.cs" />
+    <Compile Include="Interop\OnexCredentialProvider.cs" />
+    <Compile Include="Interop\OnexCredentialProviderClass.cs" />
+    <Compile Include="Interop\OnexPlapSmartcardCredentialProvider.cs" />
+    <Compile Include="Interop\OnexPlapSmartcardCredentialProviderClass.cs" />
+    <Compile Include="Interop\PasswordCredentialProvider.cs" />
+    <Compile Include="Interop\PasswordCredentialProviderClass.cs" />
+    <Compile Include="Interop\PINLogonCredentialProvider.cs" />
+    <Compile Include="Interop\PINLogonCredentialProviderClass.cs" />
+    <Compile Include="Interop\RASProvider.cs" />
+    <Compile Include="Interop\RASProviderClass.cs" />
+    <Compile Include="Interop\SerializationResponse.cs" />
+    <Compile Include="Interop\SmartcardCredentialProvider.cs" />
+    <Compile Include="Interop\SmartcardCredentialProviderClass.cs" />
+    <Compile Include="Interop\SmartcardPinProvider.cs" />
+    <Compile Include="Interop\SmartcardPinProviderClass.cs" />
+    <Compile Include="Interop\SmartcardReaderSelectionProvider.cs" />
+    <Compile Include="Interop\SmartcardReaderSelectionProviderClass.cs" />
+    <Compile Include="Interop\SmartcardWinRTProvider.cs" />
+    <Compile Include="Interop\SmartcardWinRTProviderClass.cs" />
+    <Compile Include="Interop\StatusIcon.cs" />
+    <Compile Include="Interop\StringPointer.cs" />
+    <Compile Include="Interop\tagARRAYDESC.cs" />
+    <Compile Include="Interop\tagBLOB.cs" />
+    <Compile Include="Interop\tagBSTRBLOB.cs" />
+    <Compile Include="Interop\tagCABOOL.cs" />
+    <Compile Include="Interop\tagCABSTR.cs" />
+    <Compile Include="Interop\tagCABSTRBLOB.cs" />
+    <Compile Include="Interop\tagCAC.cs" />
+    <Compile Include="Interop\tagCACLIPDATA.cs" />
+    <Compile Include="Interop\tagCACLSID.cs" />
+    <Compile Include="Interop\tagCACY.cs" />
+    <Compile Include="Interop\tagCADATE.cs" />
+    <Compile Include="Interop\tagCADBL.cs" />
+    <Compile Include="Interop\tagCAFILETIME.cs" />
+    <Compile Include="Interop\tagCAFLT.cs" />
+    <Compile Include="Interop\tagCAH.cs" />
+    <Compile Include="Interop\tagCAI.cs" />
+    <Compile Include="Interop\tagCAL.cs" />
+    <Compile Include="Interop\tagCALLCONV.cs" />
+    <Compile Include="Interop\tagCALPSTR.cs" />
+    <Compile Include="Interop\tagCALPWSTR.cs" />
+    <Compile Include="Interop\tagCAPROPVARIANT.cs" />
+    <Compile Include="Interop\tagCASCODE.cs" />
+    <Compile Include="Interop\tagCAUB.cs" />
+    <Compile Include="Interop\tagCAUH.cs" />
+    <Compile Include="Interop\tagCAUI.cs" />
+    <Compile Include="Interop\tagCAUL.cs" />
+    <Compile Include="Interop\tagCLIPDATA.cs" />
+    <Compile Include="Interop\tagDESCKIND.cs" />
+    <Compile Include="Interop\tagELEMDESC.cs" />
+    <Compile Include="Interop\tagFUNCDESC.cs" />
+    <Compile Include="Interop\tagFUNCKIND.cs" />
+    <Compile Include="Interop\tagIDLDESC.cs" />
+    <Compile Include="Interop\tagINVOKEKIND.cs" />
+    <Compile Include="Interop\tagPARAMDESC.cs" />
+    <Compile Include="Interop\tagPARAMDESCEX.cs" />
+    <Compile Include="Interop\tagRemSNB.cs" />
+    <Compile Include="Interop\tagSAFEARRAYBOUND.cs" />
+    <Compile Include="Interop\tagSTATSTG.cs" />
+    <Compile Include="Interop\tagSYSKIND.cs" />
+    <Compile Include="Interop\tagTLIBATTR.cs" />
+    <Compile Include="Interop\tagTYPEATTR.cs" />
+    <Compile Include="Interop\tagTYPEDESC.cs" />
+    <Compile Include="Interop\tagTYPEKIND.cs" />
+    <Compile Include="Interop\tagVARDESC.cs" />
+    <Compile Include="Interop\tagVARKIND.cs" />
+    <Compile Include="Interop\tagVersionedStream.cs" />
+    <Compile Include="Interop\PropertyValue.cs" />
+    <Compile Include="Interop\UsageScenario.cs" />
+    <Compile Include="Interop\V1PasswordCredentialProvider.cs" />
+    <Compile Include="Interop\V1PasswordCredentialProviderClass.cs" />
+    <Compile Include="Interop\V1SmartcardCredentialProvider.cs" />
+    <Compile Include="Interop\V1SmartcardCredentialProviderClass.cs" />
+    <Compile Include="Interop\V1WinBioCredentialProvider.cs" />
+    <Compile Include="Interop\V1WinBioCredentialProviderClass.cs" />
+    <Compile Include="Interop\VaultProvider.cs" />
+    <Compile Include="Interop\VaultProviderClass.cs" />
+    <Compile Include="Interop\WinBioCredentialProvider.cs" />
+    <Compile Include="Interop\WinBioCredentialProviderClass.cs" />
+    <Compile Include="Interop\_BYTE_SIZEDARR.cs" />
+    <Compile Include="Interop\CredentialSerialization.cs" />
+    <Compile Include="Interop\_FILETIME.cs" />
+    <Compile Include="Interop\_FLAGGED_WORD_BLOB.cs" />
+    <Compile Include="Interop\_HYPER_SIZEDARR.cs" />
+    <Compile Include="Interop\_LARGE_INTEGER.cs" />
+    <Compile Include="Interop\_LONG_SIZEDARR.cs" />
+    <Compile Include="Interop\_RemotableHandle.cs" />
+    <Compile Include="Interop\_SHORT_SIZEDARR.cs" />
+    <Compile Include="Interop\PropertyKey.cs" />
+    <Compile Include="Interop\_ULARGE_INTEGER.cs" />
+    <Compile Include="Interop\_wireBRECORD.cs" />
+    <Compile Include="Interop\_wireSAFEARRAY.cs" />
+    <Compile Include="Interop\_wireSAFEARRAY_UNION.cs" />
+    <Compile Include="Interop\_wireSAFEARR_BRECORD.cs" />
+    <Compile Include="Interop\_wireSAFEARR_BSTR.cs" />
+    <Compile Include="Interop\_wireSAFEARR_DISPATCH.cs" />
+    <Compile Include="Interop\_wireSAFEARR_HAVEIID.cs" />
+    <Compile Include="Interop\_wireSAFEARR_UNKNOWN.cs" />
+    <Compile Include="Interop\_wireSAFEARR_VARIANT.cs" />
+    <Compile Include="Interop\_wireVARIANT.cs" />
+    <Compile Include="Interop\__MIDL_IOleAutomationTypes_0001.cs" />
+    <Compile Include="Interop\__MIDL_IOleAutomationTypes_0004.cs" />
+    <Compile Include="Interop\__MIDL_IOleAutomationTypes_0005.cs" />
+    <Compile Include="Interop\__MIDL_IOleAutomationTypes_0006.cs" />
+    <Compile Include="Interop\__MIDL_IWinTypes_0009.cs" />
+    <Compile Include="Interop\InnerPropertyValue.cs" />
+    <Compile Include="Native.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserCredential.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

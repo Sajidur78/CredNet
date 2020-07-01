@@ -1,0 +1,18 @@
+﻿namespace CredNet.Interop
+{
+	
+	public enum tagCALLCONV
+	{
+		CC_FASTCALL,
+		CC_CDECL,
+		CC_MSCPASCAL,
+		CC_PASCAL = 2,
+		CC_MACPASCAL,
+		CC_STDCALL,
+		CC_FPFASTCALL,
+		CC_SYSCALL,
+		CC_MPWCDECL,
+		CC_MPWPASCAL,
+		CC_MAX
+	}
+}
