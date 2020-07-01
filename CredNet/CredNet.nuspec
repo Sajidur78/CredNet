@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>CredNet</id>
+    <version>1.0.0</version>
+    <title>CredNet</title>
+    <authors>Sajid</authors>
+    <owners>Sajid</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/Sajidur78/CredNet/tree/master</projectUrl>
+    <description>CredNet is a library for easily creating windows credential providers with .Net.</description>
+    <releaseNotes>Initial Release.</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>.net credential provider</tags>
+  </metadata>
+</package>
