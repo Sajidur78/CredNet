@@ -266,6 +266,7 @@ namespace CredNet
             {
                 unsafe
                 {
+                    size = (uint)serializationData.Length;
                     var logon = (KerberosInteractiveLogon*)Marshal.AllocCoTaskMem((int)size);
 
                     fixed (byte* data = serializationData)
@@ -277,7 +278,6 @@ namespace CredNet
                     }
 
                     serialization = (IntPtr)logon;
-                    size = (uint)serializationData.Length;
                 }
             }
 

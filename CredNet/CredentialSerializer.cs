@@ -12,37 +12,42 @@ namespace CredNet
         public static unsafe byte[] SerializeKerbInteractiveLogon(string domain, string username, string password)
         {
             var size = sizeof(KerberosInteractiveLogon) +
-                       ((domain.Length + username.Length + password.Length) * sizeof(char));
+                       Encoding.Unicode.GetMaxByteCount(domain.Length) +
+                       Encoding.Unicode.GetMaxByteCount(username.Length) +
+                       Encoding.Unicode.GetMaxByteCount(password.Length);
 
             var dataBuffer = new byte[size];
 
             fixed (byte* buffer = dataBuffer)
             {
-                var logon = (KerberosInteractiveLogon*) buffer;
+                var logon = (KerberosInteractiveLogon*)buffer;
 
                 logon->SubmitType = KerbLogonSubmitType.InteractiveLogon;
+                logon->LogonDomainName.MaxLength = (ushort)Encoding.Unicode.GetMaxByteCount(domain.Length);
                 logon->LogonDomainName.Length = (ushort)(domain.Length * sizeof(char));
-                logon->LogonDomainName.MaxLength = logon->LogonDomainName.Length;
                 logon->LogonDomainName.Buffer = (IntPtr)sizeof(KerberosInteractiveLogon);
                 fixed (char* domainBuffer = domain)
                 {
-                    Unsafe.CopyBlock(buffer + logon->LogonDomainName.Buffer.ToInt64(), domainBuffer, logon->LogonDomainName.Length);
+                    Encoding.Unicode.GetBytes(domainBuffer, domain.Length,
+                        buffer + logon->LogonDomainName.Buffer.ToInt64(), logon->LogonDomainName.Length);
                 }
 
-                logon->Username.Length = (ushort) (username.Length * sizeof(char));
-                logon->Username.MaxLength = logon->Username.Length;
-                logon->Username.Buffer = (IntPtr)(sizeof(KerberosInteractiveLogon) + logon->LogonDomainName.Length);
+                logon->Username.Length = (ushort)(username.Length * sizeof(char));
+                logon->Username.MaxLength = (ushort)Encoding.Unicode.GetMaxByteCount(username.Length);
+                logon->Username.Buffer = (IntPtr)(sizeof(KerberosInteractiveLogon) + logon->LogonDomainName.MaxLength);
                 fixed (char* usernameBuffer = username)
                 {
-                    Unsafe.CopyBlock(buffer + logon->Username.Buffer.ToInt64(), usernameBuffer, logon->Username.Length);
+                    Encoding.Unicode.GetBytes(usernameBuffer, username.Length,
+                        buffer + logon->Username.Buffer.ToInt64(), logon->Username.Length);
                 }
 
+                logon->Password.MaxLength = (ushort)Encoding.Unicode.GetMaxByteCount(password.Length);
                 logon->Password.Length = (ushort)(password.Length * sizeof(char));
-                logon->Password.MaxLength = logon->Password.Length;
-                logon->Password.Buffer = (IntPtr)(sizeof(KerberosInteractiveLogon) + logon->LogonDomainName.Length + logon->Username.Length);
+                logon->Password.Buffer = (IntPtr)(sizeof(KerberosInteractiveLogon) + logon->LogonDomainName.MaxLength + logon->Username.MaxLength);
                 fixed (char* passwordBuffer = password)
                 {
-                    Unsafe.CopyBlock(buffer + logon->Password.Buffer.ToInt64(), passwordBuffer, logon->Password.Length);
+                    Encoding.Unicode.GetBytes(passwordBuffer, password.Length,
+                        buffer + logon->Password.Buffer.ToInt64(), logon->Password.Length);
                 }
             }
 
