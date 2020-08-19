@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CredNet.Interop
@@ -11,6 +12,6 @@ namespace CredNet.Interop
 	{
 		[MethodImpl(MethodImplOptions.PreserveSig | MethodImplOptions.InternalCall)]
 		[return: MarshalAs(UnmanagedType.Error)]
-		int CredentialsChanged([ComAliasName("CredNet.Interfaces.UINT_PTR")] [In] ulong upAdviseContext);
+		int CredentialsChanged(IntPtr upAdviseContext);
 	}
 }

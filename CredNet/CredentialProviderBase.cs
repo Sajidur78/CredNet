@@ -23,7 +23,7 @@ namespace CredNet
         public List<ICredentialProviderUser> Users { get; internal set; } = new List<ICredentialProviderUser>();
         public UsageScenario UsageScenario { get; internal set; }
         public ICredentialProviderEvents Events { get; internal set; }
-        public ulong AdviseContext { get; internal set; }
+        public IntPtr AdviseContext { get; internal set; }
 
         public List<UserCredential> Credentials { get; set; } = new List<UserCredential>();
         public UserCredential DefaultCredential { get; set; }
@@ -44,7 +44,7 @@ namespace CredNet
             return HRESULT.E_NOTIMPL;
         }
 
-        public int Advise(ICredentialProviderEvents pcpe, ulong upAdviseContext)
+        public int Advise(ICredentialProviderEvents pcpe, IntPtr upAdviseContext)
         {
             Events = pcpe;
             AdviseContext = upAdviseContext;
