@@ -76,19 +76,16 @@ namespace CredNet
 
         public unsafe int GetFieldDescriptorCount(out uint pdwCount)
         {
-            foreach (var pointer in FieldDescriptorsPointers)
-            {
-                Marshal.FreeCoTaskMem(pointer);
-            }
+            FieldDescriptorsPointers.Clear();
 
             foreach (var credential in Credentials)
-            foreach (var control in credential.Controls)
-            {
-                var ptr = Marshal.AllocCoTaskMem(sizeof(FieldDescriptor));
-                *(FieldDescriptor*)ptr = control.GetFieldDescriptor();
-                
-                FieldDescriptorsPointers.Add(ptr);
-            }
+                foreach (var control in credential.Controls)
+                {
+                    var ptr = Marshal.AllocCoTaskMem(sizeof(FieldDescriptor));
+                    *(FieldDescriptor*)ptr = control.GetFieldDescriptor();
+
+                    FieldDescriptorsPointers.Add(ptr);
+                }
 
             pdwCount = (uint)FieldDescriptorsPointers.Count;
             return HRESULT.S_OK;
@@ -96,7 +93,7 @@ namespace CredNet
 
         public int GetFieldDescriptorAt(uint dwIndex, out IntPtr ppcpfd)
         {
-            ppcpfd = FieldDescriptorsPointers[(int) dwIndex];
+            ppcpfd = FieldDescriptorsPointers[(int)dwIndex];
 
             return HRESULT.S_OK;
         }

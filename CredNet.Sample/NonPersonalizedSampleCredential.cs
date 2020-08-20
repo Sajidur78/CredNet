@@ -73,7 +73,7 @@ namespace CredNet.Sample
     public class CredentialUser
     {
         public ICredentialProviderUser User { get; set; }
-        
+
         public CredentialUser(ICredentialProviderUser user)
         {
             User = user;

@@ -13,11 +13,13 @@ namespace CredNet
     public abstract class UserCredential
     {
         private bool mSelected;
+        private bool mInitialized;
+
         internal ICredentialProviderCredential InternalCredential { get; set; }
         internal ICredentialProviderCredentialEvents CredentialEvents { get; set; }
 
         protected CredentialProviderBase Provider { get; private set; }
-        
+
         public ObservableCollection<IControl> Controls { get; set; } = new ObservableCollection<IControl>();
 
         public event EventHandler OnSelected;
@@ -31,7 +33,7 @@ namespace CredNet
             internal set
             {
                 mSelected = value;
-                
+
                 if (value && OnSelected != null)
                     OnSelected(this, EventArgs.Empty);
                 else if (!value && OnDeSelected != null)
@@ -59,6 +61,13 @@ namespace CredNet
         }
 
         internal void SetProvider(CredentialProviderBase provider) => Provider = provider;
-        internal void RaiseInitializer() => Initialize();
+        internal void RaiseInitializer()
+        {
+            if (!mInitialized)
+            {
+                Initialize();
+                mInitialized = true;
+            }
+        }
     }
 }
