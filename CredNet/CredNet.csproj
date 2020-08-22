@@ -220,6 +220,7 @@
     <Compile Include="UserCredential.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CredNet.nuspec" />
     <None Include="CredNet.snk" />
     <None Include="packages.config" />
   </ItemGroup>
