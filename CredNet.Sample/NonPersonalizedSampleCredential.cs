@@ -26,6 +26,11 @@ namespace CredNet.Sample
 
         public CredentialUser SelectedUser { get; set; }
 
+        public override void Dispose()
+        {
+            
+        }
+
         protected override void Initialize()
         {
             Controls.Add(new TileBitmap { Image = Properties.Resources.TileIcon, State = FieldState.DisplayInBoth });

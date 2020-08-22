@@ -32,5 +32,10 @@ namespace CredNet.Sample
                 Credentials.Add(new PersonalizedSampleCredential(user));
             }
         }
+
+        public override void Dispose()
+        {
+            
+        }
     }
 }

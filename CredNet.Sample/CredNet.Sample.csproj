@@ -56,12 +56,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CredNet\CredNet.csproj">
-      <Project>{a1bcd92a-1005-4068-867c-050698258eb3}</Project>
-      <Name>CredNet</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -71,7 +65,14 @@
     <None Include="Install.reg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Resources\TileIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CredNet\CredNet.csproj">
+      <Project>{a1bcd92a-1005-4068-867c-050698258eb3}</Project>
+      <Name>CredNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

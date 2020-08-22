@@ -19,6 +19,11 @@ namespace CredNet.Sample
             User = user;
         }
 
+        public override void Dispose()
+        {
+            
+        }
+
         protected override void Initialize()
         {
             var passwordBox = new PasswordBox

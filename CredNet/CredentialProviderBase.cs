@@ -15,7 +15,7 @@ using CredNet.Interop;
 
 namespace CredNet
 {
-    public abstract class CredentialProviderBase : ICredentialProvider, ICredentialProviderSetUserArray
+    public abstract class CredentialProviderBase : ICredentialProvider, ICredentialProviderSetUserArray, IDisposable
     {
         internal List<IntPtr> FieldDescriptorsPointers { get; set; } = new List<IntPtr>();
         internal bool Supported { get; set; }
@@ -30,6 +30,8 @@ namespace CredNet
 
         public abstract bool IsUsageSupported(UsageScenario usage);
         public abstract void Initialize();
+
+        public abstract void Dispose();
 
         public int SetUsageScenario(UsageScenario cpus, uint dwFlags)
         {
@@ -64,6 +66,8 @@ namespace CredNet
             {
                 Marshal.FreeCoTaskMem(pointer);
             }
+
+            Dispose();
 
             if (Events != null)
             {

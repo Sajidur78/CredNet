@@ -44,6 +44,7 @@ namespace CredNet
 
         public int UnAdvise()
         {
+            Credential.Dispose();
             if (Events != null)
             {
                 Marshal.ReleaseComObject(Events);

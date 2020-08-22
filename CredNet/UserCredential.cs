@@ -10,7 +10,7 @@ using CredNet.Interop;
 
 namespace CredNet
 {
-    public abstract class UserCredential
+    public abstract class UserCredential : IDisposable
     {
         private bool mSelected;
         private bool mInitialized;
@@ -46,6 +46,8 @@ namespace CredNet
         public abstract uint GetAuthenticationPackage();
 
         public abstract SerializationResponse GetSerialization(out byte[] serialization, ref string optionalStatus, ref StatusIcon optionalIcon);
+
+        public abstract void Dispose();
 
         protected abstract void Initialize();
 
