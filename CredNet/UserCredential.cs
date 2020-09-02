@@ -13,7 +13,6 @@ namespace CredNet
     public abstract class UserCredential : IDisposable
     {
         private bool mSelected;
-        private bool mInitialized;
 
         internal ICredentialProviderCredential InternalCredential { get; set; }
         internal ICredentialProviderCredentialEvents CredentialEvents { get; set; }
@@ -65,11 +64,7 @@ namespace CredNet
         internal void SetProvider(CredentialProviderBase provider) => Provider = provider;
         internal void RaiseInitializer()
         {
-            if (!mInitialized)
-            {
-                Initialize();
-                mInitialized = true;
-            }
+            Initialize();
         }
     }
 }

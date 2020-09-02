@@ -62,11 +62,6 @@ namespace CredNet
         {
             Credentials.Clear();
 
-            foreach (var pointer in FieldDescriptorsPointers)
-            {
-                Marshal.FreeCoTaskMem(pointer);
-            }
-
             Dispose();
 
             if (Events != null)
