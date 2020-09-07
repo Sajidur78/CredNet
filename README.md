@@ -3,7 +3,7 @@ CredNet is a library for easily creating  windows credential providers with .Net
 
 # Installation
 ```ps
-Install-Package CredNet -Version 1.0.0
+Install-Package CredNet
 ```
 
 # Example Project
