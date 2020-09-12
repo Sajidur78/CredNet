@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CredNet", "CredNet\CredNet.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{8FD9C71C-60A8-4867-A76E-978D2400ABB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CredNet.Sample", "CredNet.Sample\CredNet.Sample.csproj", "{473509C0-3242-4AE6-87FB-5FAD1B079728}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CredNet.Sample", "Samples\CredNet.Sample\CredNet.Sample.csproj", "{473509C0-3242-4AE6-87FB-5FAD1B079728}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CredNet.Sample.Setup", "Samples\CredNet.Sample.Setup\CredNet.Sample.Setup.vdproj", "{CC53A7DC-0310-46F5-90D7-4F989D216CE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +25,15 @@ Global
 		{473509C0-3242-4AE6-87FB-5FAD1B079728}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{473509C0-3242-4AE6-87FB-5FAD1B079728}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{473509C0-3242-4AE6-87FB-5FAD1B079728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC53A7DC-0310-46F5-90D7-4F989D216CE7}.Debug|Any CPU.ActiveCfg = Debug
+		{CC53A7DC-0310-46F5-90D7-4F989D216CE7}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{473509C0-3242-4AE6-87FB-5FAD1B079728} = {8FD9C71C-60A8-4867-A76E-978D2400ABB1}
+		{CC53A7DC-0310-46F5-90D7-4F989D216CE7} = {8FD9C71C-60A8-4867-A76E-978D2400ABB1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1332FD0F-8E6B-4F4B-BFC2-A631A3F1A712}

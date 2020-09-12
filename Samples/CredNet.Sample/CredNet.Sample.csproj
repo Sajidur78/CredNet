@@ -33,10 +33,22 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>CredNet.Sample.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CredNet, Version=1.1.1.0, Culture=neutral, PublicKeyToken=a4635e629fbfc8b0, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CredNet.1.1.1\lib\CredNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CredNet.1.1.1\lib\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,17 +74,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="CredNet.Sample.snk" />
     <None Include="Install.reg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Resources\TileIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CredNet\CredNet.csproj">
-      <Project>{a1bcd92a-1005-4068-867c-050698258eb3}</Project>
-      <Name>CredNet</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
