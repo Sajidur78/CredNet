@@ -18,7 +18,7 @@ namespace CredNet.Sample
 
         public override bool IsUsageSupported(UsageScenario usage)
         {
-            return usage == UsageScenario.Logon;
+            return usage == UsageScenario.Logon || usage == UsageScenario.UnlockWorkstation;
         }
 
         public override void Initialize()

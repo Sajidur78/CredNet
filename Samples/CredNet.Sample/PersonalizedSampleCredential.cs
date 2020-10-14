@@ -56,8 +56,10 @@ namespace CredNet.Sample
                 return SerializationResponse.NoCredentialNotFinished;
             }
 
-            serialization = CredentialSerializer.SerializeKerbInteractiveLogon(Native.GetComputerName(),
-                User.GetUserName(), Password);
+            serialization = Provider.UsageScenario == UsageScenario.Logon ? 
+                CredentialSerializer.SerializeKerbInteractiveLogon(Native.GetComputerName(), User.GetUserName(), Password) : 
+                CredentialSerializer.SerializeKerbWorkstationUnlock(Native.GetComputerName(), User.GetUserName(), Password);
+
             return SerializationResponse.ReturnCredentialFinished;
         }
     }

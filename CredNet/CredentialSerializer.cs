@@ -53,5 +53,17 @@ namespace CredNet
 
             return dataBuffer;
         }
+
+        public static unsafe byte[] SerializeKerbWorkstationUnlock(string domain, string username, string password)
+        {
+            var data = SerializeKerbInteractiveLogon(domain, username, password);
+
+            fixed (byte* buffer = data)
+            {
+                ((KerberosInteractiveLogon*) buffer)->SubmitType = KerbLogonSubmitType.WorkstationUnlockLogon;
+            }
+
+            return data;
+        }
     }
 }

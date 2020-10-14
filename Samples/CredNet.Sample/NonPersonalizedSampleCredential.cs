@@ -61,8 +61,9 @@ namespace CredNet.Sample
         public override SerializationResponse GetSerialization(out byte[] serialization, ref string optionalStatus,
             ref StatusIcon optionalIcon)
         {
-            serialization = CredentialSerializer.SerializeKerbInteractiveLogon(Native.GetComputerName(),
-                SelectedUser.User.GetUserName(), Password);
+            serialization = Provider.UsageScenario == UsageScenario.Logon ?
+                CredentialSerializer.SerializeKerbInteractiveLogon(Native.GetComputerName(), SelectedUser.User.GetUserName(), Password) :
+                CredentialSerializer.SerializeKerbWorkstationUnlock(Native.GetComputerName(), SelectedUser.User.GetUserName(), Password);
 
             return SerializationResponse.ReturnCredentialFinished;
         }

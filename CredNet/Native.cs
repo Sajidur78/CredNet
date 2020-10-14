@@ -90,11 +90,17 @@ namespace CredNet
         LuidLogon = 84,
     }
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct KerberosInteractiveLogon
     {
         public KerbLogonSubmitType SubmitType;
         public LsaString LogonDomainName;
         public LsaString Username;
         public LsaString Password;
+
+        // Workaround to align our string data to 0x8 on x64.
+        // Removing this field will make windows deny the serialization in the case of KerbWorkstationUnlockLogon.
+        // However Windows accepts un-aligned data in case of KerbInteractiveLogon for some reason.
+        private readonly IntPtr alignmentPadding;
     }
 }
