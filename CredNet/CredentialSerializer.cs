@@ -58,14 +58,16 @@ namespace CredNet
         {
             var data = SerializeKerbInteractiveLogon(domain, username, password);
 
-            return ModifySerializationForUnlock(data);
+            return ModifySerializationForUnlock(data, KerbLogonSubmitType.WorkstationUnlockLogon);
         }
 
-        public static unsafe byte[] ModifySerializationForUnlock(byte[] Serialization)
+        public static unsafe byte[] ModifySerializationForUnlock(byte[] Serialization, KerbLogonSubmitType type)
         {
-            fixed (byte* buffer = Serialization)
-            {
-                ((KerberosInteractiveLogon*) buffer)->SubmitType = KerbLogonSubmitType.WorkstationUnlockLogon;
+            if (type == KerbLogonSubmitType.WorkstationUnlockLogon) {
+                fixed (byte* buffer = Serialization)
+                {
+                    ((KerberosInteractiveLogon*)buffer)->SubmitType = KerbLogonSubmitType.WorkstationUnlockLogon;
+                }
             }
 
             return Serialization;
