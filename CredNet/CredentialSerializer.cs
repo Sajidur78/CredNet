@@ -105,9 +105,9 @@ namespace CredNet
                 lsaUsername.Buffer = new IntPtr(buffer) + lsaUsername.Buffer.ToInt32();
                 lsaPassword.Buffer = new IntPtr(buffer) + lsaPassword.Buffer.ToInt32();
 
-                domain = lsaDomain;
-                username = lsaUsername;
-                password = lsaPassword;
+                domain = lsaDomain.ToStringUni();
+                username = lsaUsername.ToStringUni();
+                password = lsaPassword.ToStringUni();
             }
             return true;
         }
