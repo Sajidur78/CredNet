@@ -66,7 +66,7 @@ namespace CredNet
             if (type == KerbLogonSubmitType.WorkstationUnlockLogon) {
                 fixed (byte* buffer = Serialization)
                 {
-                    ((KerberosInteractiveLogon*)buffer)->SubmitType = KerbLogonSubmitType.WorkstationUnlockLogon;
+                    ((KerberosInteractiveLogon*)buffer)->SubmitType = type;
                 }
             }
 
