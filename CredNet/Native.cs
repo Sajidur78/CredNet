@@ -19,7 +19,7 @@ namespace CredNet
         {
             Length = (ushort)value.Length;
             MaxLength = Length;
-            Buffer = Marshal.StringToHGlobalAnsi(value);
+            Buffer = Marshal.StringToHGlobalUni(value);
         }
 
         public static implicit operator LsaString(string value) => new LsaString(value);
@@ -27,7 +27,7 @@ namespace CredNet
 
         public override string ToString()
         {
-            return Marshal.PtrToStringAnsi(Buffer);
+            return Marshal.PtrToStringUni(Buffer);
         }
 
         public void Dispose()

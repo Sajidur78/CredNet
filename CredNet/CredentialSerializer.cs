@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,19 +59,57 @@ namespace CredNet
         {
             var data = SerializeKerbInteractiveLogon(domain, username, password);
 
-            return ModifySerializationForUnlock(data, KerbLogonSubmitType.WorkstationUnlockLogon);
+            return ModifySerializationType(data, KerbLogonSubmitType.WorkstationUnlockLogon);
         }
 
-        public static unsafe byte[] ModifySerializationForUnlock(byte[] Serialization, KerbLogonSubmitType type)
+        public static unsafe byte[] ModifySerializationType(byte[] serialization, KerbLogonSubmitType type)
         {
             if (type == KerbLogonSubmitType.WorkstationUnlockLogon) {
-                fixed (byte* buffer = Serialization)
+                fixed (byte* buffer = serialization)
                 {
                     ((KerberosInteractiveLogon*)buffer)->SubmitType = type;
                 }
             }
 
-            return Serialization;
+            return serialization;
+        }
+
+        /// <summary>
+        /// Deserialize KerberosInteractiveLogon or KerberosWorkstationUnlock credentials.
+        /// </summary>
+        /// <param name="serialization"></param>
+        /// <param name="domain"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static unsafe bool TryDeserializeInteractiveCredentials(byte[] serialization, out string domain, out string username,
+            out string password)
+        {
+            fixed (byte* buffer = serialization)
+            {
+                var logon = (KerberosInteractiveLogon*) buffer;
+                if (logon->SubmitType != KerbLogonSubmitType.WorkstationUnlockLogon ||
+                    logon->SubmitType == KerbLogonSubmitType.InteractiveLogon)
+                {
+                    domain = null;
+                    username = null;
+                    password = null;
+                    return false;
+                }
+
+                var lsaDomain = logon->LogonDomainName;
+                var lsaUsername = logon->Username;
+                var lsaPassword = logon->Password;
+
+                lsaDomain.Buffer = new IntPtr(buffer) + lsaDomain.Buffer.ToInt32();
+                lsaUsername.Buffer = new IntPtr(buffer) + lsaUsername.Buffer.ToInt32();
+                lsaPassword.Buffer = new IntPtr(buffer) + lsaPassword.Buffer.ToInt32();
+
+                domain = lsaDomain;
+                username = lsaUsername;
+                password = lsaPassword;
+            }
+            return true;
         }
     }
 }
