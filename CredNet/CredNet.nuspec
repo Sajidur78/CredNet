@@ -11,7 +11,7 @@
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
     <projectUrl>https://github.com/Sajidur78/CredNet/tree/master</projectUrl>
     <description>CredNet is a library for easily creating windows credential providers with .Net.</description>
-    <releaseNotes>Fix errors related authentication packages.</releaseNotes>
+    <releaseNotes>Fix status message display on GetSerialization.</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>.net credential provider</tags>
     <dependencies>
