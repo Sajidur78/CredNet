@@ -290,8 +290,6 @@ namespace CredNet
                 ProviderClassGuid = providerGuid
             };
 
-            ppszOptionalStatusText = null;
-            pcpsiOptionalStatusIcon = StatusIcon.None;
             return HRESULT.S_OK;
         }
 
