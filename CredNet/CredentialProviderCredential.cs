@@ -268,13 +268,13 @@ namespace CredNet
                 unsafe
                 {
                     size = (uint)serializationData.Length;
-                    var logon = (KerberosInteractiveLogon*)Marshal.AllocCoTaskMem((int)size);
+                    var logon = (byte*)Marshal.AllocCoTaskMem((int)size);
 
                     fixed (byte* data = serializationData)
                     {
                         for (int i = 0; i < serializationData.Length; i++)
                         {
-                            *((byte*)logon + i) = data[i];
+                            *(logon + i) = data[i];
                         }
                     }
 

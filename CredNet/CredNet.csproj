@@ -64,7 +64,9 @@
     <Compile Include="Controls\CommandLink.cs" />
     <Compile Include="Controls\FieldControl.cs" />
     <Compile Include="Controls\SubmitButton.cs" />
+    <Compile Include="CredentialProviderFilterBase.cs" />
     <Compile Include="CredentialSerializer.cs" />
+    <Compile Include="CredUI.cs" />
     <Compile Include="DataBindingCollection.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Globals.cs" />
