@@ -41,10 +41,42 @@ namespace CredNet
         }
     }
 
+    public struct LsaHandle : IDisposable
+    {
+        public IntPtr Handle;
+
+        public LsaHandle(IntPtr handle)
+        {
+            Handle = handle;
+        }
+
+        public static implicit operator LsaHandle(IntPtr handle) => new LsaHandle(handle);
+        public static implicit operator IntPtr(LsaHandle handle) => handle.Handle;
+
+        public static LsaHandle ConnectUntrusted()
+        {
+            Native.LsaConnectUntrusted(out var handle);
+            return handle;
+        }
+
+        public bool IsValid()
+        {
+            return Handle != IntPtr.Zero;
+        }
+
+        public void Dispose()
+        {
+            Native.LsaDeregisterLogonProcess(Handle);
+        }
+    }
+
     public class Native
     {
         [DllImport("secur32.dll", SetLastError = false)]
         public static extern uint LsaConnectUntrusted(out IntPtr LsaHandle);
+
+        [DllImport("secur32.dll", SetLastError = false)]
+        public static extern IntPtr LsaDeregisterLogonProcess([In] IntPtr handle);
 
         [DllImport("secur32.dll", SetLastError = false)]
         public static extern uint LsaLookupAuthenticationPackage(IntPtr lsaHandle, ref LsaString packageName, out uint authenticationPackage);
@@ -72,9 +104,11 @@ namespace CredNet
 
         public static uint LookupAuthenticationPackage(LsaString packageName)
         {
-            LsaConnectUntrusted(out var lsa);
-            LsaLookupAuthenticationPackage(lsa, ref packageName, out var package);
-            return package;
+            using (var handle = LsaHandle.ConnectUntrusted())
+            {
+                LsaLookupAuthenticationPackage(handle, ref packageName, out var package);
+                return package;
+            }
         }
     }
 
