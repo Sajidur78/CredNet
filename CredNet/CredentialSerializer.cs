@@ -88,8 +88,8 @@ namespace CredNet
             fixed (byte* buffer = serialization)
             {
                 var logon = (KerberosInteractiveLogon*) buffer;
-                if (logon->SubmitType != KerbLogonSubmitType.WorkstationUnlockLogon ||
-                    logon->SubmitType == KerbLogonSubmitType.InteractiveLogon)
+                if (logon->SubmitType != KerbLogonSubmitType.WorkstationUnlockLogon &&
+                    logon->SubmitType != KerbLogonSubmitType.InteractiveLogon)
                 {
                     domain = null;
                     username = null;
