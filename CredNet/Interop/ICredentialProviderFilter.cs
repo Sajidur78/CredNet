@@ -12,7 +12,7 @@ namespace CredNet.Interop
 	{
 		[MethodImpl(MethodImplOptions.PreserveSig | MethodImplOptions.InternalCall)]
 		[return: MarshalAs(UnmanagedType.Error)]
-		int Filter([In] UsageScenario cpus, [In] uint dwFlags, [In] ref Guid rgclsidProviders, [In] [Out] ref bool rgbAllow, [In] uint cProviders);
+		int Filter([In] UsageScenario cpus, [In] uint dwFlags, IntPtr rgclsidProviders, IntPtr rgbAllow, [In] uint cProviders);
 
 		[MethodImpl(MethodImplOptions.PreserveSig | MethodImplOptions.InternalCall)]
 		[return: MarshalAs(UnmanagedType.Error)]

@@ -15,10 +15,10 @@ namespace CredNet
         public abstract ManagedCredentialSerialization UpdateRemoteCredential(
             ManagedCredentialSerialization inputSerialization);
 
-        public unsafe int Filter(UsageScenario cpus, uint dwFlags, ref Guid rgclsidProviders, ref bool rgbAllow, uint cProviders)
+        public unsafe int Filter(UsageScenario cpus, uint dwFlags, IntPtr rgclsidProviders, IntPtr rgbAllow, uint cProviders)
         {
-            Guid* pProviders = (Guid*) Unsafe.AsPointer(ref rgclsidProviders);
-            bool* pAllow = (bool*) Unsafe.AsPointer(ref rgbAllow);
+            Guid* pProviders = (Guid*) rgclsidProviders.ToPointer();
+            bool* pAllow = (bool*) rgbAllow.ToPointer();
 
             try
             {
