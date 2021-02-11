@@ -12,7 +12,7 @@ namespace CredNet
     {
         public static unsafe byte[] SerializeKerbInteractiveLogon(string domain, string username, string password)
         {
-            var size = sizeof(KerberosInteractiveLogon) +
+            var size = sizeof(KerberosInteractiveUnlockLogon) +
                        Encoding.Unicode.GetMaxByteCount(domain.Length) +
                        Encoding.Unicode.GetMaxByteCount(username.Length) +
                        Encoding.Unicode.GetMaxByteCount(password.Length);
@@ -21,12 +21,12 @@ namespace CredNet
 
             fixed (byte* buffer = dataBuffer)
             {
-                var logon = (KerberosInteractiveLogon*)buffer;
+                var logon = (KerberosInteractiveUnlockLogon*)buffer;
 
                 logon->SubmitType = KerbLogonSubmitType.InteractiveLogon;
                 logon->LogonDomainName.MaxLength = (ushort)Encoding.Unicode.GetMaxByteCount(domain.Length);
                 logon->LogonDomainName.Length = (ushort)(domain.Length * sizeof(char));
-                logon->LogonDomainName.Buffer = (IntPtr)sizeof(KerberosInteractiveLogon);
+                logon->LogonDomainName.Buffer = (IntPtr)sizeof(KerberosInteractiveUnlockLogon);
                 fixed (char* domainBuffer = domain)
                 {
                     Encoding.Unicode.GetBytes(domainBuffer, domain.Length,
@@ -35,7 +35,7 @@ namespace CredNet
 
                 logon->Username.Length = (ushort)(username.Length * sizeof(char));
                 logon->Username.MaxLength = (ushort)Encoding.Unicode.GetMaxByteCount(username.Length);
-                logon->Username.Buffer = (IntPtr)(sizeof(KerberosInteractiveLogon) + logon->LogonDomainName.MaxLength);
+                logon->Username.Buffer = (IntPtr)(sizeof(KerberosInteractiveUnlockLogon) + logon->LogonDomainName.MaxLength);
                 fixed (char* usernameBuffer = username)
                 {
                     Encoding.Unicode.GetBytes(usernameBuffer, username.Length,
@@ -44,7 +44,7 @@ namespace CredNet
 
                 logon->Password.MaxLength = (ushort)Encoding.Unicode.GetMaxByteCount(password.Length);
                 logon->Password.Length = (ushort)(password.Length * sizeof(char));
-                logon->Password.Buffer = (IntPtr)(sizeof(KerberosInteractiveLogon) + logon->LogonDomainName.MaxLength + logon->Username.MaxLength);
+                logon->Password.Buffer = (IntPtr)(sizeof(KerberosInteractiveUnlockLogon) + logon->LogonDomainName.MaxLength + logon->Username.MaxLength);
                 fixed (char* passwordBuffer = password)
                 {
                     Encoding.Unicode.GetBytes(passwordBuffer, password.Length,
@@ -67,7 +67,7 @@ namespace CredNet
             if (type == KerbLogonSubmitType.WorkstationUnlockLogon) {
                 fixed (byte* buffer = serialization)
                 {
-                    ((KerberosInteractiveLogon*)buffer)->SubmitType = type;
+                    ((KerberosInteractiveUnlockLogon*)buffer)->SubmitType = type;
                 }
             }
 
@@ -75,7 +75,7 @@ namespace CredNet
         }
 
         /// <summary>
-        /// Deserialize KerberosInteractiveLogon or KerberosWorkstationUnlock credentials.
+        /// Deserialize KerberosInteractiveUnlockLogon or KerberosWorkstationUnlock credentials.
         /// </summary>
         /// <param name="serialization"></param>
         /// <param name="domain"></param>
@@ -87,7 +87,7 @@ namespace CredNet
         {
             fixed (byte* buffer = serialization)
             {
-                var logon = (KerberosInteractiveLogon*) buffer;
+                var logon = (KerberosInteractiveUnlockLogon*) buffer;
                 if (logon->SubmitType != KerbLogonSubmitType.WorkstationUnlockLogon &&
                     logon->SubmitType != KerbLogonSubmitType.InteractiveLogon)
                 {
@@ -105,9 +105,9 @@ namespace CredNet
                 lsaUsername.Buffer = new IntPtr(buffer) + lsaUsername.Buffer.ToInt32();
                 lsaPassword.Buffer = new IntPtr(buffer) + lsaPassword.Buffer.ToInt32();
 
-                domain = lsaDomain.ToStringUni();
-                username = lsaUsername.ToStringUni();
-                password = lsaPassword.ToStringUni();
+                domain = lsaDomain.ToString();
+                username = lsaUsername.ToString();
+                password = lsaPassword.ToString();
             }
             return true;
         }

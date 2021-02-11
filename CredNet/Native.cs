@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace CredNet
 {
+    /// <summary>
+    /// ASCII string used by LSA
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct LsaString : IDisposable
     {
@@ -30,11 +33,37 @@ namespace CredNet
             return Marshal.PtrToStringAnsi(Buffer) ?? string.Empty;
         }
 
-        public string ToStringUni()
+        public void Dispose()
+        {
+            Marshal.FreeHGlobal(Buffer);
+        }
+    }
+
+
+    /// <summary>
+    /// Unicode string used by LSA
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct LsaStringUni : IDisposable
+    {
+        public ushort Length;
+        public ushort MaxLength;
+        public IntPtr Buffer;
+
+        public LsaStringUni(string value)
+        {
+            Length = (ushort)(value.Length * sizeof(ushort));
+            MaxLength = Length;
+            Buffer = Marshal.StringToHGlobalUni(value);
+        }
+
+        public static implicit operator LsaStringUni(string value) => new LsaStringUni(value);
+        public static implicit operator string(LsaStringUni value) => value.ToString();
+
+        public override string ToString()
         {
             return Marshal.PtrToStringUni(Buffer) ?? string.Empty;
         }
-
         public void Dispose()
         {
             Marshal.FreeHGlobal(Buffer);
@@ -130,16 +159,13 @@ namespace CredNet
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct KerberosInteractiveLogon
+    public struct KerberosInteractiveUnlockLogon
     {
         public KerbLogonSubmitType SubmitType;
-        public LsaString LogonDomainName;
-        public LsaString Username;
-        public LsaString Password;
+        public LsaStringUni LogonDomainName;
+        public LsaStringUni Username;
+        public LsaStringUni Password;
 
-        // Workaround to align our string data to 0x8 on x64.
-        // Removing this field will make windows deny the serialization in the case of KerbWorkstationUnlockLogon.
-        // However Windows accepts un-aligned data in case of KerbInteractiveLogon for some reason.
-        private readonly IntPtr alignmentPadding;
+        public long LoginId;
     }
 }
