@@ -130,7 +130,7 @@ namespace CredNet
             if (control != null && control is ITileImageControl imageControl)
             {
                 var color = imageControl.Background;
-                phbmp = imageControl.Image?.GetHbitmap(Color.FromArgb(color.A, color.B, color.G, color.R)) ?? EmptyBitmap.GetHbitmap(Color.FromArgb(color.A, color.B, color.G, color.R));
+                phbmp = Globals.GetBitmapHandle(imageControl.Image ?? EmptyBitmap, color);
             }
 
             return HRESULT.S_OK;
